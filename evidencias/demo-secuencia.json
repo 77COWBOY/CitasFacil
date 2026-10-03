@@ -1,0 +1,72 @@
+[
+  {
+    "imagen": "capturas/01-portada.jpg",
+    "titulo": "01 · Presentación",
+    "descripcion": "CitasFacil / eDoc permite consultar médicos y gestionar citas."
+  },
+  {
+    "imagen": "capturas/02-login.jpg",
+    "titulo": "02 · Inicio de sesión",
+    "descripcion": "El acceso identifica el perfil de administrador, médico o paciente."
+  },
+  {
+    "imagen": "capturas/03-panel-administrador.jpg",
+    "titulo": "03 · Panel de administración",
+    "descripcion": "El administrador consulta las métricas y gestiona la clínica."
+  },
+  {
+    "imagen": "capturas/04-medicos.jpg",
+    "titulo": "04 · Gestión de médicos",
+    "descripcion": "El administrador dispone de búsqueda y formularios de gestión."
+  },
+  {
+    "imagen": "capturas/05-panel-medico.jpg",
+    "titulo": "05 · Panel del médico",
+    "descripcion": "El médico consulta su agenda, pacientes y horarios."
+  },
+  {
+    "imagen": "capturas/06-publicar-horario.jpg",
+    "titulo": "06 · Publicación de un horario",
+    "descripcion": "Se completa una consulta para el 5 de octubre de 2026 con 2 cupos."
+  },
+  {
+    "imagen": "capturas/07-horario-publicado.jpg",
+    "titulo": "07 · Horario guardado",
+    "descripcion": "La consulta aparece en la lista y la aplicación confirma la operación."
+  },
+  {
+    "imagen": "capturas/08-panel-paciente.jpg",
+    "titulo": "08 · Panel del paciente",
+    "descripcion": "El paciente dispone de búsqueda de médicos y acceso a sus citas."
+  },
+  {
+    "imagen": "capturas/09-citas-disponibles.jpg",
+    "titulo": "09 · Disponibilidad",
+    "descripcion": "El nuevo horario aparece para el paciente con 2 cupos libres."
+  },
+  {
+    "imagen": "capturas/10-reserva-confirmada.jpg",
+    "titulo": "10 · Reserva realizada",
+    "descripcion": "La aplicación confirma la reserva y los cupos libres bajan de 2 a 1."
+  },
+  {
+    "imagen": "capturas/11-mis-citas.jpg",
+    "titulo": "11 · Cita registrada",
+    "descripcion": "La consulta reservada aparece en Mis citas con fecha, hora y turno."
+  },
+  {
+    "imagen": "capturas/12-reserva-persistente.jpg",
+    "titulo": "12 · Persistencia comprobada",
+    "descripcion": "Después de cerrar sesión y volver a entrar, la cita sigue registrada."
+  },
+  {
+    "imagen": "capturas/13-cita-cancelada.jpg",
+    "titulo": "13 · Cancelación",
+    "descripcion": "El paciente cancela su reserva y la consulta desaparece de Mis citas."
+  },
+  {
+    "imagen": "capturas/14-cupo-recuperado.jpg",
+    "titulo": "14 · Cupo disponible de nuevo",
+    "descripcion": "Al consultar los horarios, el cupo se recuperó: vuelven a quedar 2."
+  }
+]

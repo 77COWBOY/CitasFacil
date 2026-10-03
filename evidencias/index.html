@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CitasFacil · Evidencias de ejecución</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px system-ui,sans-serif;background:#eef3fa;color:#132642}header{padding:30px max(20px,calc((100% - 1120px)/2));background:#132642;color:white}h1{font-size:28px;margin:0 0 10px}header p{margin:0;color:#c7d7ef}main{max-width:1120px;margin:28px auto;padding:0 20px}section{padding:24px;border:1px solid #d8e2ee;border-radius:14px;background:white;margin-bottom:24px}h2{font-size:21px;margin:0 0 12px}p{line-height:1.6}video{width:100%;max-height:720px;background:#101e35;border-radius:8px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}figure{margin:0;border:1px solid #d8e2ee;border-radius:10px;overflow:hidden}figure img{width:100%;display:block}figcaption{padding:14px;line-height:1.5}figcaption strong{display:block;margin-bottom:6px}a{color:#065fe6}.status{display:flex;gap:14px;flex-wrap:wrap}.status span{padding:10px 14px;background:#eaf7ef;color:#17653a;border-radius:8px}footer{padding:0 20px 30px;max-width:1120px;margin:auto;color:#52647a}
+</style>
+</head>
+<body>
+<header><h1>CitasFacil · Implementación inicial</h1><p>Segundo entregable · Evidencia real de ejecución · 2 de octubre de 2026</p></header>
+<main>
+<section><h2>Demo de la aplicación</h2><p>Recorrido con 14 capturas reales de una instalación limpia de pruebas. Muestra los tres perfiles, publicación de horario, reserva, persistencia y cancelación. Datos ficticios; video sin audio.</p><video controls preload="metadata" poster="capturas/01-portada.jpg"><source src="demo-citasfacil.mp4" type="video/mp4">Descarga el video desde el enlace siguiente.</video><p><a href="demo-citasfacil.mp4" download>Descargar video</a> · <a href="https://github.com/77COWBOY/CitasFacil">Repositorio de GitHub</a></p></section>
+<section><h2>Verificación técnica</h2><div class="status"><span>103 comprobaciones funcionales</span><span>32 archivos PHP correctos</span><span>Respaldo restaurado: 7 tablas</span></div><p><a href="pruebas-funcionales.txt">Resultados funcionales</a> · <a href="pruebas-sintaxis.txt">Sintaxis PHP</a> · <a href="pruebas-base-datos.txt">Base de datos y respaldo</a></p></section>
+<section><h2>Capturas originales del recorrido</h2><div class="gallery" id="gallery"></div></section>
+<section><h2>Evidencias del equipo y diseño</h2><p>La evidencia de los clones en los equipos de cada integrante y la comparación con el diseño del primer entregable requieren información del equipo. Consulta el informe ENTREGABLE-2.md incluido en el proyecto.</p></section>
+</main>
+<footer>CitasFacil / eDoc · Evidencias obtenidas en Windows · Capturas sin modificar</footer>
+<script>
+const steps=[['01-portada.jpg','Portada','Presentación del sistema de citas médicas.'],['02-login.jpg','Inicio de sesión','Acceso mediante una cuenta de ejemplo.'],['03-panel-administrador.jpg','Administrador','Resumen y acceso a la gestión de la clínica.'],['04-medicos.jpg','Médicos','Búsqueda y gestión desde el perfil administrador.'],['05-panel-medico.jpg','Médico','Agenda y consultas del médico.'],['06-publicar-horario.jpg','Publicar horario','Formulario con fecha, hora y 2 cupos.'],['07-horario-publicado.jpg','Horario guardado','Confirmación y consulta visible en la lista.'],['08-panel-paciente.jpg','Paciente','Panel con búsqueda y acceso a sus citas.'],['09-citas-disponibles.jpg','Disponibilidad','La consulta aparece con 2 cupos libres.'],['10-reserva-confirmada.jpg','Reserva','Confirmación y reducción a 1 cupo libre.'],['11-mis-citas.jpg','Cita registrada','La reserva aparece en Mis citas.'],['12-reserva-persistente.jpg','Persistencia','La cita sigue registrada al volver a iniciar sesión.'],['13-cita-cancelada.jpg','Cancelación','La reserva se elimina de Mis citas.'],['14-cupo-recuperado.jpg','Cupo recuperado','Vuelven a quedar 2 cupos libres.']];
+const gallery=document.getElementById('gallery');
+steps.forEach(([file,title,description],i)=>{const figure=document.createElement('figure');const link=document.createElement('a');link.href='capturas/'+file;const img=document.createElement('img');img.src=link.href;img.alt=title;img.loading='lazy';link.append(img);const caption=document.createElement('figcaption');const heading=document.createElement('strong');heading.textContent=`${i+1}. ${title}`;caption.append(heading,document.createTextNode(description));figure.append(link,caption);gallery.append(figure)});
+</script>
+</body></html>

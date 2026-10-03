@@ -1,0 +1,2 @@
+PASS: integridad y rollback
+PASS: respaldo restaurado; conteos y hashes coinciden en 7 tablas

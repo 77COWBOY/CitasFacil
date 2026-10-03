@@ -1,0 +1,62 @@
+CITAFACIL / EDOC - VERSION PORTATIL
+
+ABRIR
+1. Extrae TODO el ZIP en una carpeta donde puedas escribir, por ejemplo Documentos.
+2. Haz doble clic en Iniciar-eDoc.cmd.
+3. Se abrira http://127.0.0.1:8080 en tu navegador.
+No necesitas XAMPP, internet ni instalar PHP o MariaDB.
+No abras los archivos PHP directamente ni ejecutes desde dentro del ZIP.
+
+REQUISITOS
+Windows 10/11 de 64 bits, PowerShell 5.1 y un navegador moderno.
+Los ejecutables incluidos son para Windows x64, no para macOS, Linux o Windows de 32 bits.
+No se instalan servicios ni se cambia la politica de seguridad del equipo.
+Una politica empresarial que bloquee ejecutables puede requerir intervencion del administrador.
+
+CUENTAS DE EJEMPLO
+Administrador: admin@edoc.com
+Medico: doctor@edoc.com
+Paciente: patient@edoc.com
+Clave inicial de las tres cuentas: 123
+Puedes cambiarla en Configuracion. Estas cuentas proceden del esquema de ejemplo original.
+
+CERRAR Y TRASLADAR CON LOS DATOS
+1. Cierra las paginas abiertas y ejecuta Detener-eDoc.cmd.
+2. Espera el mensaje de que eDoc esta detenido.
+3. Copia la carpeta COMPLETA, incluidas runtime y .local, a la otra PC.
+4. Ejecuta Iniciar-eDoc.cmd en esa PC.
+Nunca copies los archivos de la base mientras MariaDB esta funcionando.
+Las copias en distintas PC son independientes: sus cambios no se sincronizan.
+
+RESPALDOS
+Con el sistema iniciado, ejecuta Respaldar-eDoc.cmd.
+Los archivos SQL se guardan en .local/backups. El cierre tambien crea un respaldo.
+La base activa esta en .local/mysql/data. No borres esa carpeta.
+Si una copia nueva no contiene .local, se crea una base de ejemplo en el primer inicio.
+Si contiene datos incompletos, el programa se detiene para no reemplazarlos.
+
+PROBLEMAS
+- Puerto 8080 ocupado: desde una terminal ejecuta Iniciar-eDoc.cmd -Port 8081.
+- Puerto 3308 ocupado: cierra la otra copia de eDoc con su Detener-eDoc.cmd.
+- Copia siempre runtime completa; contiene los programas y sus bibliotecas.
+- Revisa .local/server.log y .local/mysql/data/mysql-error.log si hay errores.
+- La aplicacion solo escucha en 127.0.0.1 (este equipo).
+- No es una configuracion para publicar directamente en internet.
+
+CONFIGURACION TECNICA
+EDOC_DB_HOST, EDOC_DB_PORT, EDOC_DB_USER, EDOC_DB_PASSWORD y EDOC_DB_NAME
+permiten usar una base externa. En ese modo se requiere un servidor ya iniciado.
+El servidor web debe servir la raiz del proyecto utilizando router.php para
+mantener privados configuracion, respaldos, pruebas y ejecutables.
+El lanzador genera .local/php.ini con rutas de la ubicacion actual.
+Para ejecutar herramientas PHP utiliza:
+runtime\php\php.exe -c .local\php.ini tools\backup.php
+La restauracion en una base VACIA se realiza con tools\restore.php respaldo.sql;
+configura EDOC_DB_NAME para el destino y arranca antes el servidor de base de datos.
+Nunca reemplaza tablas ya existentes.
+Las pruebas funcionales usan las cuentas de ejemplo; ejecutalas en una copia de pruebas.
+
+COMPONENTES INCLUIDOS
+PHP 8.2.12 y MariaDB procedentes de la instalacion XAMPP disponible en este equipo.
+Se conservaron sus archivos de licencia dentro de runtime.
+Esta entrega se verifico localmente; no se ha probado fisicamente en otra PC.

@@ -1,69 +1,34 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/animations.css">  
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/index.css">
-    <title>eDoc</title>
-    <style>
-        table{
-            animation: transitionIn-Y-bottom 0.5s;
-        }
-    </style>
-        
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/index.css?v=3">
+  <title>eDoc · CitasFacil</title>
 </head>
 <body>
-    
-    <div class="full-height">
-        <center>
-        <table border="0">
-            <tr>
-                <td width="80%">
-                    <font class="edoc-logo">Doc</font>
-                    <font class="edoc-logo-sub">|CitasFacil</font>
-                </td>
-                <td width="10%">
-                   <a href="login.php"  class="non-style-link"><p class="nav-item">INICIAR SESIÓN</p></a>
-                </td>
-                <td  width="10%">
-                    <a href="signup.php" class="non-style-link"><p class="nav-item" style="padding-right: 10px;">REGISTRARSE</p></a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td  colspan="3">
-                    <p class="heading-text">Evite problemas y retrasos.</p>
-
-                </td>
-            </tr>
-            <tr>
-                <td  colspan="3">
-                    <p class="sub-text2">¿Cómo está la salud hoy? Parece que no está bien.<br>No te preocupes. Encuentra a tu médico en línea y reserva una cita según tus preferencias con eDoc. <br>
-                    Ofrecemos un servicio gratuito de canalización médica, Haz tu cita ahora.</p>
-                </td>
-            </tr>
-            <tr>
-                
-                <td colspan="3">
-                    <center>
-                    <a href="login.php" >
-                        <input type="button" value="Hacer cita" class="login-btn btn-primary btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
-                    </a>
-                </center>
-                </td>
-                
-            </tr>
-            <tr>
-                <td colspan="3">
-                   
-                </td>
-            </tr>
-        </table>
-    </center>
-    
-    </div>
+  <script>
+    if (location.protocol === 'file:') {
+      addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.landing-main').innerHTML = '<h1>Abre Iniciar-eDoc.cmd</h1><p>Esta aplicacion necesita su servidor local. Cierra esta pagina y haz doble clic en Iniciar-eDoc.cmd dentro de la carpeta extraida. El navegador se abrira automaticamente.</p>';
+        document.querySelector('nav').hidden = true;
+      });
+    }
+  </script>
+  <div class="landing">
+    <header class="landing-header">
+      <a class="edoc-logo" href="index.html">eDoc<span>CitasFacil</span></a>
+      <nav aria-label="Acceso">
+        <a href="login.php">Iniciar sesión</a>
+        <a href="signup.php">Registrarse</a>
+      </nav>
+    </header>
+    <main class="landing-main">
+      <h1>Evita problemas y retrasos.</h1>
+      <p>Encuentra a tu médico y reserva una cita según tus preferencias.<br>Consulta los horarios disponibles y organiza tu próxima visita con eDoc.</p>
+      <a class="primary-action" href="login.php">Hacer una cita</a>
+    </main>
+    <footer>eDoc · CitasFacil</footer>
+  </div>
 </body>
 </html>

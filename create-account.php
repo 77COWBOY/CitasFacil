@@ -1,178 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/animations.css">  
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/signup.css">
-        
-    <title>Crear Cuenta</title>
-    <style>
-        .container{
-            animation: transitionIn-X 0.5s;
-        }
-    </style>
-</head>
-<body>
 <?php
-
-
-session_start();
-
-$_SESSION["user"]="";
-$_SESSION["usertype"]="";
-
-// Set the new timezone
-date_default_timezone_set('Asia/Kolkata');
-$date = date('Y-m-d');
-
-$_SESSION["date"]=$date;
-
-
-//import database
-include("connection.php");
-
-
-
-
-
-if($_POST){
-
-    $result= $database->query("select * from webuser");
-
-    $fname=$_SESSION['personal']['fname'];
-    $lname=$_SESSION['personal']['lname'];
-    $name=$fname." ".$lname;
-    $address=$_SESSION['personal']['address'];
-    $nic=$_SESSION['personal']['nic'];
-    $dob=$_SESSION['personal']['dob'];
-    $email=$_POST['newemail'];
-    $tele=$_POST['tele'];
-    $newpassword=$_POST['newpassword'];
-    $cpassword=$_POST['cpassword'];
-    
-    if ($newpassword==$cpassword){
-        $sqlmain= "select * from webuser where email=?;";
-        $stmt = $database->prepare($sqlmain);
-        $stmt->bind_param("s",$email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if($result->num_rows==1){
-            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>';
-        }else{
-            //TODO
-            $database->query("insert into patient(pemail,pname,ppassword, paddress, pnic,pdob,ptel) values('$email','$name','$newpassword','$address','$nic','$dob','$tele');");
-            $database->query("insert into webuser values('$email','p')");
-
-            //print_r("insert into patient values($pid,'$email','$fname','$lname','$newpassword','$address','$nic','$dob','$tele');");
-            $_SESSION["user"]=$email;
-            $_SESSION["usertype"]="p";
-            $_SESSION["username"]=$fname;
-
-            header('Location: patient/index.php');
-            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>';
+require __DIR__.'/includes/app.php';
+if (!empty($_SESSION['user'])) go('/dashboard.php');
+if (empty($_SESSION['personal'])) go('/signup.php');
+$error='';
+if ($_SERVER['REQUEST_METHOD']==='POST') {
+    check_csrf();
+    $email=strtolower(trim($_POST['newemail']??''));
+    $phone=trim($_POST['tele']??'');
+    $password=$_POST['newpassword']??'';
+    if (!filter_var($email,FILTER_VALIDATE_EMAIL) || strlen($email)>255) $error='Ingresa un correo válido.';
+    elseif (!preg_match('/^[0-9]{8}$/',$phone)) $error='El teléfono debe tener 8 dígitos.';
+    elseif (strlen($password)<8 || strlen($password)>72) $error='La contraseña debe tener entre 8 y 72 caracteres.';
+    elseif ($password!==($_POST['cpassword']??'')) $error='Las contraseñas no coinciden.';
+    if (!$error) {
+        $p=$_SESSION['personal']; $database->begin_transaction();
+        try {
+            query('INSERT INTO webuser(email,usertype) VALUES (?,?)',[$email,'p']);
+            query('INSERT INTO patient(pemail,pname,ppassword,paddress,pnic,pdob,ptel) VALUES (?,?,?,?,?,?,?)',[$email,$p['fname'].' '.$p['lname'],password_hash($password,PASSWORD_DEFAULT),$p['address'],$p['nic'],$p['dob'],$phone]);
+            $database->commit(); session_regenerate_id(true); unset($_SESSION['personal']);
+            $_SESSION['user']=$email; $_SESSION['usertype']='p'; go('/patient/index.php');
+        } catch (mysqli_sql_exception $e) {
+            $database->rollback();
+            $error=$e->getCode()===1062 ? 'Ya existe una cuenta con ese correo.' : 'No se pudo crear la cuenta.';
+            error_log($e->getMessage());
         }
-        
-    }else{
-        $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>';
     }
-
-
-
-    
-}else{
-    //header('location: signup.php');
-    $error='<label for="promter" class="form-label"></label>';
 }
-
-?>
-
-
-    <center>
-    <div class="container">
-        <table border="0" style="width: 69%;">
-            <tr>
-                <td colspan="2">
-                    <p class="header-text">Comenzemos!</p>
-                    <p class="sub-text">Establece tu cuenta ahora.</p>
-                </td>
-            </tr>
-            <tr>
-                <form action="" method="POST" >
-                <td class="label-td" colspan="2">
-                    <label for="newemail" class="form-label">Email: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <input type="email" name="newemail" class="input-text" placeholder="Correo Electronico" required>
-                </td>
-                
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <label for="tele" class="form-label">Número de Telefono: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                   <input type="tel" name="tele" class="input-text" placeholder="ej: 81234567" pattern="[0-9]{8}">
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <label for="newpassword" class="form-label">Crear Nueva Contraseña: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <input type="password" name="newpassword" class="input-text" placeholder="Nueva Contraseña" required>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <label for="cpassword" class="form-label">Confirmar Contraseña: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <input type="password" name="cpassword" class="input-text" placeholder="Confirmar Contraseña" required>
-                </td>
-            </tr>
-     
-            <tr>
-                
-                <td colspan="2">
-                    <?php echo $error ?>
-
-                </td>
-            </tr>
-            
-            <tr>
-                <td>
-                    <input type="reset" value="Borrar" class="login-btn btn-primary-soft btn" >
-                </td>
-                <td>
-                    <input type="submit" value="Continuar" class="login-btn btn-primary btn">
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <br>
-                    <label for="" class="sub-text" style="font-weight: 280;">Ya tiene un cuenta&#63; </label>
-                    <a href="login.php" class="hover-link1 non-style-link">Iniciar Sesión</a>
-                    <br><br><br>
-                </td>
-            </tr>
-
-                    </form>
-            </tr>
-        </table>
-
-    </div>
-</center>
-</body>
-</html>
+page('Crear cuenta · Acceso');
+if ($error) echo '<p class="error">'.h($error).'</p>';
+echo '<form class="account" method="post">'.token();
+field('newemail','Correo electrónico','email','maxlength="255"');
+field('tele','Teléfono','tel','pattern="[0-9]{8}" maxlength="8"');
+field('newpassword','Contraseña','password','minlength="8" maxlength="72"');
+field('cpassword','Confirmar contraseña','password','minlength="8" maxlength="72"');
+echo '<button>Crear cuenta</button><p><a href="signup.php">Volver a los datos personales</a></p></form>';
+endpage();

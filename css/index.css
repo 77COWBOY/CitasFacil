@@ -1,84 +1,19 @@
-body{
-    background: url("../img/bg01.jpg") center center / cover no-repeat fixed;
-    min-height: 100vh;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-.full-height {
-    background: rgba(26, 26, 26, 0.548);
-    background-attachment: fixed;
-    max-height: 100vh;
-    height: 100vh;
-
-
-}
-table{
-    width: 100%;
-    padding-top: 5px;
-    
-}
-.heading-text{
-    color: white;
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 63px;
-    margin-top: 15%;
-    text-align: center;
-    margin-bottom: 0;
-}
-
-.sub-text2{
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 17px;
-    line-height: 27px;
-    font-weight: 400;
-    text-align: center;
-    margin-top: 0;
-}
-
-
-.register-btn{
-    background-color: rgba(240, 248, 255, 0.589);
-    color: #345cc4;
-}
-
-
-.edoc-logo{
-    color: white;
-    font-weight: bolder;
-    font-size: 20px;
-    padding-left: 20px;
-    animation: transitionIn-Y-over 0.5s;
-}
-
-.edoc-logo-sub{
-    color: rgba(255, 255, 255, 0.733);
-    font-size: 12px;
-
-}
-
-
-.nav-item{
-    color: rgba(255, 255, 255, 0.671);
-    text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    animation: transitionIn-Y-over 0.5s;
-}
-
-.nav-item:hover{
-    color: #f0f0f0;
-
-}
-
-.footer-hashen{
-    position: absolute;
-    bottom: 0;
-    left: 45%;
-    font-size: 13px;
-    animation: transitionIn-Y-over 0.5s;
-}
+@font-face{font-family:Inter;src:url('/css/fonts/inter/Inter-Regular.woff') format('woff');font-display:swap}
+*{box-sizing:border-box}
+body{margin:0;background:#2b465e url('../img/bg01.jpg') center center/cover no-repeat;font-family:Inter,Arial,sans-serif;color:#fff}
+.landing{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;background:linear-gradient(110deg,#132638ae,#172b4599)}
+.landing-header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 32px}
+.edoc-logo{font-size:24px;font-weight:700;text-decoration:none;color:#fff;white-space:nowrap}
+.edoc-logo span{display:inline-block;font-size:12px;font-weight:400;padding-left:10px;margin-left:10px;border-left:1px solid #ffffff80}
+nav{display:flex;gap:38px;align-items:center}
+nav a{color:#fff;text-decoration:none;font-size:13px;text-transform:uppercase;letter-spacing:.5px;padding:10px 0}
+nav a:hover{border-bottom:2px solid #fff}
+.landing-main{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:70px 24px 130px}
+h1{font-size:clamp(30px,3.3vw,46px);line-height:1.25;letter-spacing:-1px;margin:0 0 20px}
+p{font-size:16px;line-height:1.85;color:#ecf2f8;max-width:760px;margin:0 0 28px;text-wrap:pretty}
+.primary-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 28px;border-radius:5px;background:#087bea;box-shadow:0 4px 12px #003a6433;color:white;font-size:14px;font-weight:600;text-decoration:none;transition:background .18s}
+.primary-action:hover{background:#0066cc}
+a:focus-visible{outline:3px solid white;outline-offset:5px}
+footer{text-align:center;padding:20px;font-size:12px;color:#e0e9f1}
+@media(max-width:600px){.landing-header{padding:20px;align-items:flex-start;flex-wrap:wrap;gap:14px}nav{gap:22px}nav a{font-size:11px}.landing-main{padding:65px 22px 85px}p{font-size:14px}p br{display:none}.edoc-logo{font-size:22px}body{background-position:48% center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

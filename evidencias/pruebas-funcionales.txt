@@ -1,0 +1,103 @@
+PASS: Portada
+PASS: Panel privado
+PASS: Token vacío rechazado
+PASS: Parámetros de tipo incorrecto rechazados
+PASS: Archivo interno protegido: /includes/app.php
+PASS: Archivo interno protegido: /config/database.php
+PASS: Archivo interno protegido: /database/schema.sql
+PASS: Archivo interno protegido: /tests/smoke-test.php
+PASS: SQL no público
+PASS: Respaldo no público
+PASS: Registro requiere primer paso
+PASS: Protección CSRF
+PASS: Rechazo de inyección SQL
+PASS: Datos personales con acentos y apóstrofe
+PASS: Registro completo
+PASS: Sesión activa no vuelve a registrarse
+PASS: Cancelar cita inexistente muestra error
+PASS: Contraseña protegida
+PASS: Separación de roles
+PASS: Inicio de sesión doctor@edoc.com
+PASS: Publicar horario médico
+PASS: Acceso con cuenta nueva
+PASS: Reservar cita
+PASS: Control de cupo
+PASS: Cancelar cita
+PASS: Cancelación persistida
+PASS: Inicio de sesión admin@edoc.com
+PASS: Panel administrador
+PASS: Inicio de sesión patient@edoc.com
+PASS: Panel paciente
+PASS: Inicio de sesión admin@edoc.com
+PASS: Administrador crea médico
+PASS: Clave de médico protegida
+PASS: Administrador edita médico
+PASS: Búsqueda de médico
+PASS: Ruta de pacientes del ZIP adaptada
+PASS: Acceso del médico creado
+PASS: Médico nuevo no ve pacientes ajenos
+PASS: Ruta administrativa protegida
+PASS: Edición requiere contraseña actual
+PASS: Actualización de perfil y contraseña
+PASS: Acceso con contraseña actualizada
+PASS: Médico no puede administrar médicos
+PASS: Inicio de sesión admin@edoc.com
+PASS: Eliminar médico temporal
+PASS: Eliminación persistida
+PASS: Fuente local del ZIP
+PASS: Ilustración del dashboard
+PASS: Inicio de sesión patient@edoc.com
+PASS: Dashboard específico: patient
+PASS: Cuatro métricas: patient
+PASS: Navegación separada: patient
+PASS: Inicio sin formularios de gestión: patient
+PASS: Restricción patient → doctor
+PASS: Restricción patient → admin
+PASS: Publicación según rol: patient
+PASS: Historial: patient
+PASS: Filtro de fecha: patient
+PASS: Enlace/recurso patient: /css/app.css
+PASS: Enlace/recurso patient: /dashboard.php
+PASS: Enlace/recurso patient: /doctors.php
+PASS: Enlace/recurso patient: /schedule.php
+PASS: Enlace/recurso patient: /appointments.php
+PASS: Enlace/recurso patient: /settings.php
+PASS: Enlace/recurso patient: /img/care-team.svg
+PASS: Inicio de sesión doctor@edoc.com
+PASS: Dashboard específico: doctor
+PASS: Cuatro métricas: doctor
+PASS: Navegación separada: doctor
+PASS: Inicio sin formularios de gestión: doctor
+PASS: Restricción doctor → patient
+PASS: Restricción doctor → admin
+PASS: Publicación según rol: doctor
+PASS: Historial: doctor
+PASS: Filtro de fecha: doctor
+PASS: Enlace/recurso doctor: /css/app.css
+PASS: Enlace/recurso doctor: /dashboard.php
+PASS: Enlace/recurso doctor: /doctors.php
+PASS: Enlace/recurso doctor: /schedule.php
+PASS: Enlace/recurso doctor: /appointments.php
+PASS: Enlace/recurso doctor: /patients.php
+PASS: Enlace/recurso doctor: /settings.php
+PASS: Enlace/recurso doctor: /img/care-team.svg
+PASS: Inicio de sesión admin@edoc.com
+PASS: Dashboard específico: admin
+PASS: Cuatro métricas: admin
+PASS: Navegación separada: admin
+PASS: Inicio sin formularios de gestión: admin
+PASS: Restricción admin → patient
+PASS: Restricción admin → doctor
+PASS: Publicación según rol: admin
+PASS: Historial: admin
+PASS: Filtro de fecha: admin
+PASS: Enlace/recurso admin: /css/app.css
+PASS: Enlace/recurso admin: /dashboard.php
+PASS: Enlace/recurso admin: /doctors.php
+PASS: Enlace/recurso admin: /schedule.php
+PASS: Enlace/recurso admin: /appointments.php
+PASS: Enlace/recurso admin: /patients.php
+PASS: Enlace/recurso admin: /settings.php
+PASS: Plantillas privadas
+PASS: Previsualización privada
+PASS: Conexión duplicada retirada
