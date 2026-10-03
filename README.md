@@ -36,7 +36,7 @@ Requisitos: Windows 10/11 de 64 bits, PowerShell 5.1 y un navegador moderno. La 
 
 Consultar `LEEME.txt` para puertos alternativos, configuración externa y respaldos.
 
-El paquete local de entrega se llama `CitasFacil-Entregable2-Windows-x64.zip`, contiene el proyecto completo con `runtime/` y las evidencias, y se acompaña de `SHA256SUMS.txt`. Se comprobó su extracción y ejecución desde cero en otra carpeta del mismo equipo. La publicación de la descarga requiere completar la autenticación en GitHub.
+La [Release del segundo entregable](https://github.com/77COWBOY/CitasFacil/releases/tag/entregable-2-2026-10-02) ofrece `CitasFacil-Entregable2-Windows-x64.zip`, que contiene el proyecto completo con `runtime/` y las evidencias, junto con `SHA256SUMS.txt`. Se comprobó su extracción y ejecución desde cero en otra carpeta del mismo equipo.
 
 ## Organización
 

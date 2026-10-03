@@ -5,28 +5,29 @@
 | Requisito | Evidencia disponible | Pendiente |
 | --- | --- | --- |
 | Software de aplicación | Código de CitasFacil/eDoc ejecutado en una instalación limpia el 2 de octubre de 2026 | Presentar las evidencias adjuntas |
-| Repositorio compartido en GitHub | [77COWBOY/CitasFacil](https://github.com/77COWBOY/CitasFacil), accesible mediante Git | Publicar los cambios locales de esta entrega |
+| Repositorio compartido en GitHub | [77COWBOY/CitasFacil](https://github.com/77COWBOY/CitasFacil), código publicado en `main` y clon desde GitHub comprobado | Confirmar accesos de los demás integrantes |
 | Clones locales de todos los integrantes | Sin evidencia aportada | Captura o registro de cada integrante |
 | Descripción del flujo de trabajo | Flujo definido en `README.md` y `CONTRIBUTING.md` | Acreditar participación y revisiones reales del equipo |
-| Demo funcional o video | Video de 2:06 y 14 capturas reales en `evidencias/` | Disponible localmente; publicar junto al código |
+| Demo funcional o video | Video de 2:06 y 14 capturas reales publicados en `evidencias/` | Presentar las evidencias adjuntas |
 | Coherencia con el primer diseño de UI | No se dispone del primer entregable | Comparar pantallas y justificar cambios, si existen |
 
 ## Datos por completar
 
 - Repositorio de GitHub: https://github.com/77COWBOY/CitasFacil.
+- Distribución portátil: [Release del segundo entregable](https://github.com/77COWBOY/CitasFacil/releases/tag/entregable-2-2026-10-02).
 - Integrantes y usuarios de GitHub: pendiente.
 - Video: [evidencias/demo-citasfacil.mp4](evidencias/demo-citasfacil.mp4). Recorrido con capturas reales, sin audio; no es una grabación continua de pantalla.
 - Referencia al diseño del primer entregable: pendiente.
 
 ## Configuración del repositorio
 
-Esta carpeta está conectada al remoto `origin` indicado y la rama local `main` sigue a `origin/main`. Se conservó el contenido local al incorporar el historial remoto. La versión de esta entrega se prepara como commit local. La publicación requiere autenticar una cuenta con permisos de escritura en GitHub; no se declara publicada hasta verificar el envío.
+Esta carpeta está conectada al remoto `origin` indicado y la rama local `main` sigue a `origin/main`. Se conservó el contenido local al incorporar el historial remoto. El código y las evidencias se publicaron en `main`; se verificó el commit remoto y se obtuvo un clon nuevo directamente desde GitHub.
 
 1. Confirmar a todos los integrantes como colaboradores del repositorio existente.
-2. Revisar y publicar el commit de esta entrega.
+2. Mantener el código publicado y revisar los siguientes cambios mediante el flujo descrito.
 3. Versionar el código, los recursos, el esquema SQL, las instrucciones y las evidencias. Mantener `.local/` fuera de Git: contiene bases activas, sesiones y respaldos.
 4. Distribuir `runtime/` mediante el paquete `CitasFacil-Entregable2-Windows-x64.zip`, fuera del historial Git.
-5. Publicar la rama principal y comprobar el acceso de los integrantes.
+5. Comprobar el acceso de los integrantes a la rama principal publicada.
 6. Cada integrante debe clonar el repositorio en su equipo y ejecutar la aplicación siguiendo el README.
 
 Comandos para cada integrante:
@@ -65,12 +66,12 @@ Agregar imágenes de las pantallas equivalentes del primer diseño y de la imple
 
 ## Lista final
 
-- [ ] URL de GitHub accesible para el docente y el equipo.
+- [x] Repositorio de GitHub accesible y clon desde GitHub comprobado.
 - [x] Archivos fuente y pasos de ejecución completos.
 - [ ] Todos los integrantes agregados como colaboradores.
 - [ ] Evidencia de un clon local por integrante.
 - [x] Flujo de trabajo definido y descrito.
-- [x] Video y capturas de la demo preparados localmente.
-- [ ] Publicación en GitHub verificada.
+- [x] Video y capturas de la demo publicados junto al código.
+- [x] Publicación del código en GitHub verificada.
 - [ ] Comparación con el diseño inicial y justificaciones necesarias.
 - [ ] Datos del equipo y enlaces completados.

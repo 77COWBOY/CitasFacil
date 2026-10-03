@@ -6,7 +6,9 @@ Realizada el 2 de octubre de 2026 en este equipo.
 
 Se incorporó el historial del remoto `https://github.com/77COWBOY/CitasFacil.git` y se preparó el commit de implementación `710da58`. Se creó un clon de control desde ese repositorio local con `git clone --no-hardlinks`, se configuró su remoto como la URL de GitHub y se comprobó que no tenía cambios pendientes.
 
-Esta comprobación verifica que el código versionado puede clonarse. El clon de control se obtuvo desde la carpeta local porque la publicación todavía requería autenticación; no se presenta como un clon de la nueva versión desde GitHub ni como evidencia de otro integrante.
+En la primera comprobación, el clon de control se obtuvo desde la carpeta local porque la publicación todavía requería autenticación.
+
+Después de autenticar GitHub, se publicaron los commits de la entrega y se comprobó que el remoto `main` apuntara a `d256530fc264aca3b6548ee0a31603574785f706`. Se creó además un clon nuevo directamente desde `https://github.com/77COWBOY/CitasFacil.git`: su remoto corresponde a ese repositorio, su commit coincide y no presenta cambios locales pendientes. Esta comprobación acredita el clon realizado en este equipo; no se presenta como evidencia de otro integrante.
 
 ## Paquete portátil
 
