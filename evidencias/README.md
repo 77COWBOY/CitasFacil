@@ -21,6 +21,7 @@ Se ejecutó el recorrido de demo en el navegador: acceso de administrador, consu
 | Sintaxis PHP | 32 archivos correctos | [pruebas-sintaxis.txt](pruebas-sintaxis.txt) |
 | Integridad de tablas y rollback | PASS | [pruebas-base-datos.txt](pruebas-base-datos.txt) |
 | Restauración del respaldo | Conteos y hashes coinciden en 7 tablas | [pruebas-base-datos.txt](pruebas-base-datos.txt) |
+| Paquete portátil | Extracción, arranque desde cero, HTTP 200 y cierre correctos | [verificacion-distribucion.md](verificacion-distribucion.md) |
 
 Los registros de sintaxis se muestran con rutas relativas para facilitar su lectura. No se publican bases activas, sesiones ni respaldos personales.
 
