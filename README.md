@@ -10,13 +10,21 @@ Repositorio compartido: [77COWBOY/CitasFacil](https://github.com/77COWBOY/CitasF
 - Panel y navegación según el rol del usuario.
 - Gestión de médicos desde la cuenta de administrador.
 - Publicación y consulta de horarios médicos.
-- Reserva y cancelación de citas, con control de cupos.
+- Reserva, cambio de hora y cancelación de citas con hora exacta.
+- Una cita activa por paciente, protegida también ante solicitudes simultáneas.
+- Horarios con inicio y salida, edición con protección de reservas y validación de superposiciones.
+- Calendario con vistas de mes y semana, horas disponibles y confirmación de reserva.
+- Catálogo de 56 especialidades en español y 16 médicos de demostración adicionales con horarios próximos.
 - Consulta de pacientes según permisos y actualización del perfil.
 - Respaldo y restauración de la base de datos mediante herramientas locales.
 
 ## Tecnologías
 
-PHP, MariaDB, HTML y CSS. La distribución portátil incluye PHP 8.2.12 y MariaDB en `runtime/`, con sus licencias. El esquema inicial está en `database/schema.sql`.
+PHP, MariaDB, HTML, CSS y JavaScript. La distribución portátil incluye PHP 8.2.12 y MariaDB en `runtime/`, con sus licencias. El esquema inicial está en `database/schema.sql`.
+
+La [agenda por horas](AGENDA.md) reemplaza los cupos y números de turno. La duración de cada consulta se configura en el horario del médico, con 30 minutos por defecto. JavaScript mejora el calendario y las confirmaciones; la validación y los formularios funcionan en el servidor.
+
+El [catálogo de demostración](CATALOGO-DEMO.md) incluye 96 jornadas con inicio, salida y duración por consulta. Una instalación nueva lo prepara automáticamente; sobre una base existente se puede cargar con `runtime\php\php.exe -c .local\php.ini tools\seed-demo.php`, después de ejecutar `tools\setup.php`. Los datos de demostración están identificados en la interfaz.
 
 ## Ejecutar en Windows
 

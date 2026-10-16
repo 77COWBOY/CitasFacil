@@ -9,8 +9,6 @@ function icon($name) {
         'ticket'=>'<path d="M6 3h12v19l-6-4-6 4z"/>',
         'settings'=>'<path d="m9 3-1 3-3 1v4l-2 1 2 3v3l3 1 1 2h6l1-2 3-1v-3l2-3-2-1V7l-3-1-1-3z"/><circle cx="12" cy="12" r="3"/>',
         'logout'=>'<path d="M10 4H4v16h6m4-13 5 5-5 5m-6-5h11"/>',
-        'search'=>'<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/>',
-        'grid'=>'<path d="M4 4h2v2H4zm7 0h2v2h-2zm7 0h2v2h-2zM4 11h2v2H4zm7 0h2v2h-2zm7 0h2v2h-2zM4 18h2v2H4zm7 0h2v2h-2zm7 0h2v2h-2z"/>',
     ];
     return '<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.($paths[$name]??$paths['medical']).'</svg>';
 }

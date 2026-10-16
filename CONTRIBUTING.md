@@ -31,7 +31,7 @@ runtime\php\php.exe -c .local\php.ini tools\backup.php
 runtime\php\php.exe -c .local\php.ini tests\database-test.php
 ```
 
-`dashboard-test.php` también ejecuta `adaptation-test.php` y `smoke-test.php`: son 103 comprobaciones en total. Las pruebas crean y eliminan registros de ejemplo, por lo que deben realizarse sobre una base de pruebas. La prueba de base de datos necesita un respaldo recién generado y verifica su restauración en una base temporal.
+`dashboard-test.php` también ejecuta `adaptation-test.php` y `smoke-test.php`. Las pruebas crean y eliminan registros de ejemplo, por lo que deben realizarse sobre una base de pruebas. La prueba de base de datos necesita un respaldo recién generado y verifica su restauración en una base temporal. La agenda por horas añade pruebas de concurrencia e interacción; los comandos actuales están en [AGENDA.md](AGENDA.md).
 
 ## Evidencia del clon de cada integrante
 

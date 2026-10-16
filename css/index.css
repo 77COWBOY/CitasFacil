@@ -1,19 +1,63 @@
 @font-face{font-family:Inter;src:url('/css/fonts/inter/Inter-Regular.woff') format('woff');font-display:swap}
+:root{color-scheme:light;--ink:#071840;--muted:#607da5;--accent:#0781ff;--line:#d5e4f4;--gutter:clamp(24px,4.6vw,80px)}
 *{box-sizing:border-box}
-body{margin:0;background:#2b465e url('../img/bg01.jpg') center center/cover no-repeat;font-family:Inter,Arial,sans-serif;color:#fff}
-.landing{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;background:linear-gradient(110deg,#132638ae,#172b4599)}
-.landing-header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 32px}
-.edoc-logo{font-size:24px;font-weight:700;text-decoration:none;color:#fff;white-space:nowrap}
-.edoc-logo span{display:inline-block;font-size:12px;font-weight:400;padding-left:10px;margin-left:10px;border-left:1px solid #ffffff80}
-nav{display:flex;gap:38px;align-items:center}
-nav a{color:#fff;text-decoration:none;font-size:13px;text-transform:uppercase;letter-spacing:.5px;padding:10px 0}
-nav a:hover{border-bottom:2px solid #fff}
-.landing-main{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:70px 24px 130px}
-h1{font-size:clamp(30px,3.3vw,46px);line-height:1.25;letter-spacing:-1px;margin:0 0 20px}
-p{font-size:16px;line-height:1.85;color:#ecf2f8;max-width:760px;margin:0 0 28px;text-wrap:pretty}
-.primary-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 28px;border-radius:5px;background:#087bea;box-shadow:0 4px 12px #003a6433;color:white;font-size:14px;font-weight:600;text-decoration:none;transition:background .18s}
-.primary-action:hover{background:#0066cc}
-a:focus-visible{outline:3px solid white;outline-offset:5px}
-footer{text-align:center;padding:20px;font-size:12px;color:#e0e9f1}
-@media(max-width:600px){.landing-header{padding:20px;align-items:flex-start;flex-wrap:wrap;gap:14px}nav{gap:22px}nav a{font-size:11px}.landing-main{padding:65px 22px 85px}p{font-size:14px}p br{display:none}.edoc-logo{font-size:22px}body{background-position:48% center}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+body{margin:0;background:#f5faff;color:var(--ink);font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:7px;border-radius:4px}
+.skip-link{position:fixed;left:20px;top:-100px;z-index:10;padding:12px 18px;background:white;border:1px solid var(--line)}
+.skip-link:focus{top:16px}
+.landing{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(120deg,#f8fbff 0%,#f4f9ff 60%,#eef7ff 100%)}
+.landing::before,.landing::after{content:"";position:absolute;pointer-events:none;z-index:-1;width:780px;height:780px;border-radius:120px;background:linear-gradient(135deg,#e4f1ff90,#eaf5ff40);transform:rotate(44deg)}
+.landing::before{top:-360px;right:-160px}
+.landing::after{right:-60px;bottom:-670px;width:1100px;height:1100px;border-radius:160px}
+.landing-header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px var(--gutter);border-bottom:1px solid var(--line)}
+.edoc-logo{display:inline-flex;align-items:center;gap:22px;font-family:Arial,sans-serif;font-size:40px;line-height:1;font-weight:750;letter-spacing:-1.6px;text-decoration:none;white-space:nowrap}
+.edoc-logo span{border-left:2px solid #9eb4d0;padding-left:22px;font-family:Inter,Arial,sans-serif;font-size:20px;font-weight:600;letter-spacing:-.6px;line-height:1.4;color:#5978a2}
+nav{display:flex;align-items:center;gap:clamp(24px,4vw,64px)}
+nav a{position:relative;padding:12px 0;font-size:15px;font-weight:600;text-decoration:none}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:5px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+nav a:hover{color:#0068d9}
+nav a:hover::after{transform:scaleX(1)}
+.landing-main{position:relative;flex:1;display:grid;grid-template-columns:.86fr 1fr;gap:clamp(36px,4.4vw,72px);align-items:center;width:100%;max-width:1800px;margin:0 auto;padding:36px var(--gutter) 12px}
+.hero-copy{position:relative;z-index:1;padding:30px 0;min-width:0}
+.eyebrow{margin:0 0 28px;color:#5978a2;font-size:clamp(11px,1.02vw,17px);line-height:1.6;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+h1{margin:0;font-family:Inter,Arial,sans-serif;font-size:clamp(64px,6.85vw,118px);line-height:1.025;font-weight:800;letter-spacing:-.065em}
+h1 span{color:var(--accent)}
+.hero-description{margin:34px 0 0;color:var(--muted);font-size:clamp(18px,1.74vw,29px);line-height:1.5;font-weight:500;letter-spacing:-.035em;max-width:650px;text-wrap:pretty}
+.hero-features{display:flex;align-items:center;list-style:none;margin:44px 0 0;padding:38px 0 0;border-top:1px solid var(--line)}
+.feature{display:flex;align-items:center;gap:14px;min-width:0;font-size:clamp(12px,1.12vw,18px);font-weight:600;letter-spacing:-.035em;color:var(--muted);white-space:nowrap}
+.feature+.feature{border-left:1px solid var(--line);margin-left:auto;padding-left:clamp(12px,2.2vw,36px)}
+.feature-icon{display:grid;place-items:center;flex-shrink:0;width:clamp(42px,3.8vw,62px);height:clamp(42px,3.8vw,62px);border-radius:50%;background:linear-gradient(135deg,#e6f4ff,#dceeff);color:var(--ink)}
+.feature-icon svg{width:76%;height:76%;overflow:visible}
+.hero-visual{position:relative;aspect-ratio:1;width:100%;min-width:0;margin:0;isolation:isolate}
+.hero-visual::before{content:"";position:absolute;z-index:-1;inset:7% 8% 8% -9%;border-radius:50%;background:#e7f3ffb3}
+.doctor-portrait{display:block;object-fit:cover;width:100%;height:100%;border-radius:30px;box-shadow:0 20px 65px -45px #4d80ad44}
+.floating-icon{position:absolute;pointer-events:none;will-change:transform;filter:drop-shadow(0 16px 12px #204b7c2b)}
+.floating-icon svg{display:block;width:100%;height:auto;overflow:visible}
+.floating-clock{width:23%;right:3%;top:11%;transform:rotate(10deg);animation:clock-float 7s ease-in-out infinite}
+.floating-calendar{width:30%;left:3%;bottom:8%;transform:rotate(-10deg);animation:calendar-float 8s ease-in-out infinite}
+.clock-minute{transform-origin:99px 98px;animation:clock-tick 24s linear infinite}
+.calendar-confirm{transform-origin:131px 150px;animation:confirmation-pulse 4s ease-in-out infinite}
+.feature-clock-hand{transform-origin:24px 24px;animation:clock-tick 32s linear infinite}
+.feature-specialists .feature-icon{animation:specialist-bob 5s ease-in-out infinite}
+.specialist-pulse{transform-origin:31px 40px;animation:confirmation-pulse 3s ease-in-out infinite}
+.feature-check{stroke-dasharray:18;stroke-dashoffset:0;animation:check-draw 5s ease-in-out infinite}
+footer{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;max-width:1800px;margin:0 auto;padding:0 var(--gutter) 30px;color:var(--muted);font-size:16px;font-weight:600}
+.motion-toggle{padding:8px 0;border:0;background:transparent;color:#58779b;font:inherit;font-size:12px;font-weight:400;cursor:pointer;text-underline-offset:4px}
+.motion-toggle:hover{text-decoration:underline}
+.motion-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:5px;border-radius:3px}
+.motion-paused *{animation-play-state:paused!important}
+.local-server-required{grid-template-columns:1fr;align-content:center;gap:20px}
+.local-server-required h1{font-size:36px;letter-spacing:-1px}
+.local-server-required p{max-width:650px;color:var(--muted);font-size:18px;line-height:1.7}
+@keyframes clock-float{0%,100%{transform:translateY(0) rotate(10deg)}50%{transform:translateY(20px) rotate(5deg)}}
+@keyframes calendar-float{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-42px) rotate(-5deg)}}
+@keyframes clock-tick{to{transform:rotate(360deg)}}
+@keyframes confirmation-pulse{0%,65%,100%{transform:scale(1)}78%{transform:scale(1.12)}90%{transform:scale(.97)}}
+@keyframes specialist-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes check-draw{0%,55%,100%{stroke-dashoffset:0}70%{stroke-dashoffset:18}85%{stroke-dashoffset:0}}
+@media(min-width:1600px){.landing-main{gap:68px;padding-top:44px;padding-bottom:24px}.hero-features{margin-top:48px;padding-top:42px}footer{padding-bottom:36px}}
+@media(max-width:1100px) and (min-width:761px){.landing-main{gap:30px;grid-template-columns:.9fr 1fr}.edoc-logo{font-size:34px}.edoc-logo span{font-size:17px}h1{font-size:clamp(54px,6.8vw,76px)}.hero-copy{padding:24px 0}.eyebrow{letter-spacing:.18em;margin-bottom:22px}.hero-description{margin-top:26px;font-size:18px}.hero-features{margin-top:30px;padding-top:24px;gap:10px}.feature{flex-direction:column;gap:8px;font-size:12px;flex:1}.feature+.feature{padding-left:10px;margin:0}.doctor-portrait{border-radius:24px}footer{padding-top:16px;font-size:13px}}
+@media(max-width:760px){:root{--gutter:24px}.landing-header{padding-top:22px;padding-bottom:22px;gap:14px}.edoc-logo{font-size:31px;gap:12px}.edoc-logo span{font-size:14px;padding-left:12px;letter-spacing:-.4px}nav{gap:20px}nav a{font-size:12px}.landing-main{grid-template-columns:1fr;gap:24px;padding-top:40px;padding-bottom:32px}.hero-copy{padding:0}.eyebrow{font-size:11px;letter-spacing:.19em;margin-bottom:22px}h1{font-size:clamp(58px,11.4vw,84px);line-height:1.04;letter-spacing:-.06em}.hero-description{margin-top:24px;font-size:19px;max-width:540px;letter-spacing:-.025em}.hero-features{margin-top:28px;padding-top:24px;gap:14px}.feature{gap:9px;font-size:12px}.feature+.feature{padding-left:15px}.feature-icon{width:42px;height:42px}.hero-visual{max-width:600px;justify-self:center}.doctor-portrait{border-radius:24px}.floating-clock{right:4%;top:8%;width:24%}.floating-calendar{width:29%;left:2%;bottom:8%}footer{padding-top:0;padding-bottom:26px;font-size:13px}.landing::after{bottom:-820px}.landing::before{right:-580px}}
+@media(max-width:420px){:root{--gutter:20px}.landing-header{flex-wrap:wrap;row-gap:14px}.edoc-logo{font-size:30px}nav{width:100%;justify-content:flex-end;gap:24px}nav a{padding:4px 0;font-size:12px}.landing-main{padding-top:30px}h1{font-size:clamp(51px,12vw,60px)}.hero-description{font-size:17px}.hero-features{gap:8px}.feature{flex:1;flex-direction:column;gap:9px;font-size:12px}.feature+.feature{padding-left:10px}.feature-icon{width:43px;height:43px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.floating-icon{will-change:auto}}

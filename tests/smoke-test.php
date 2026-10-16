@@ -1,25 +1,9 @@
 <?php
 if (PHP_SAPI!=='cli') exit;
-require dirname(__DIR__).'/includes/connection.php';
+require __DIR__.'/http-client.php';
 $cookie=tempnam(sys_get_temp_dir(),'edoc');
 $email='test-'.bin2hex(random_bytes(6)).'@example.com';
 $pid=null; $sid=null;
-function request($path,$data=null) {
-    global $cookie;
-    $ch=curl_init((getenv('EDOC_TEST_URL') ?: 'http://127.0.0.1:8080').$path);
-    curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_COOKIEJAR=>$cookie,CURLOPT_COOKIEFILE=>$cookie,CURLOPT_FOLLOWLOCATION=>false]);
-    if ($data!==null) curl_setopt_array($ch,[CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>http_build_query($data)]);
-    $body=curl_exec($ch); $code=curl_getinfo($ch,CURLINFO_RESPONSE_CODE); curl_close($ch);
-    return [$code,$body];
-}
-function csrf($body) { preg_match('/name="csrf" value="([^"]+)"/',$body,$m); return $m[1]??''; }
-function check($ok,$label) { if (!$ok) throw new RuntimeException('FAIL: '.$label); echo "PASS: $label\n"; }
-function login($email) {
-    [, $body]=request('/login.php');
-    [$code]=request('/login.php',['csrf'=>csrf($body),'useremail'=>$email,'userpassword'=>'123']);
-    check($code===302,'Inicio de sesión '.$email);
-}
-function logout() { [, $body]=request('/dashboard.php'); request('/logout.php',['csrf'=>csrf($body)]); }
 try {
     check(request('/')[0]===200,'Portada');
     check(request('/dashboard.php')[0]===302,'Panel privado');
@@ -49,18 +33,18 @@ try {
     logout();
     login('doctor@edoc.com');
     [, $b]=request('/dashboard.php'); $title='QA-'.bin2hex(random_bytes(6)); $date=date('Y-m-d',strtotime('+2 days'));
-    [$code]=request('/dashboard.php',['csrf'=>csrf($b),'action'=>'schedule','title'=>$title,'date'=>$date,'time'=>'14:00','capacity'=>'1']);
+    [$code]=request('/schedule.php',['csrf'=>csrf($b),'action'=>'schedule','title'=>$title,'date'=>$date,'time'=>'14:00','endtime'=>'15:00','duration'=>'30']);
     check($code===302,'Publicar horario médico');
     $stmt=$database->prepare('SELECT scheduleid FROM schedule WHERE title=?'); $stmt->bind_param('s',$title); $stmt->execute(); $sid=$stmt->get_result()->fetch_assoc()['scheduleid'];
     logout();
     [, $b]=request('/login.php');
     check(request('/login.php',['csrf'=>csrf($b),'useremail'=>$email,'userpassword'=>'Prueba123!'])[0]===302,'Acceso con cuenta nueva');
     [, $b]=request('/dashboard.php'); $t=csrf($b);
-    check(request('/dashboard.php',['csrf'=>$t,'action'=>'book','id'=>$sid])[0]===302,'Reservar cita');
-    [$code,$b]=request('/dashboard.php',['csrf'=>$t,'action'=>'book','id'=>$sid]);
-    check($code===200 && str_contains($b,'No quedan cupos'),'Control de cupo');
+    check(request('/schedule.php',['csrf'=>$t,'action'=>'book','id'=>$sid,'start'=>$date.' 14:00'])[0]===302,'Reservar cita a una hora concreta');
+    [$code,$b]=request('/schedule.php',['csrf'=>$t,'action'=>'book','id'=>$sid,'start'=>$date.' 14:30']);
+    check($code===200 && str_contains($b,'Ya tienes una cita activa'),'Una cita activa por paciente');
     $aid=$database->query('SELECT appoid FROM appointment WHERE pid='.(int)$pid.' AND scheduleid='.(int)$sid)->fetch_assoc()['appoid'];
-    check(request('/dashboard.php',['csrf'=>$t,'action'=>'cancel','id'=>$aid])[0]===302,'Cancelar cita');
+    check(request('/appointments.php',['csrf'=>$t,'action'=>'cancel','id'=>$aid])[0]===302,'Cancelar cita');
     check($database->query('SELECT appoid FROM appointment WHERE appoid='.(int)$aid)->num_rows===0,'Cancelación persistida');
     logout(); login('admin@edoc.com');
     check(request('/admin/index.php')[0]===200,'Panel administrador'); logout();

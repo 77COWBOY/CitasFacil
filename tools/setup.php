@@ -8,6 +8,7 @@ if (!preg_match('/^[a-zA-Z0-9_]+$/',$name)) throw new RuntimeException('Nombre d
 $db->query("CREATE DATABASE IF NOT EXISTS `$name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 $db->select_db($name); $db->set_charset('utf8mb4');
 $tables=$db->query('SHOW TABLES')->num_rows;
+$fresh=$tables===0;
 if ($tables===0) {
     $sql=file_get_contents(dirname(__DIR__).'/database/schema.sql');
     $sql=str_replace(['ENGINE=MyISAM','DEFAULT CHARSET=latin1'],['ENGINE=InnoDB','DEFAULT CHARSET=utf8mb4'],$sql);
@@ -25,6 +26,16 @@ foreach (['admin','doctor','patient','webuser','schedule','appointment','special
     if ($info['ENGINE']!=='InnoDB') $db->query("ALTER TABLE `$table` ENGINE=InnoDB");
     if ($info['TABLE_COLLATION']!=='utf8mb4_unicode_ci') $db->query("ALTER TABLE `$table` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 }
+// Los horarios anteriores no tienen salida conocida: no inventar una duración.
+$db->query('ALTER TABLE schedule ADD COLUMN IF NOT EXISTS endtime TIME NULL AFTER scheduletime');
+$db->multi_query(file_get_contents(dirname(__DIR__).'/database/migrations/20261016_timed_appointments.sql'));
+do { if ($r=$db->store_result()) $r->free(); } while ($db->more_results() && $db->next_result());
+$db->begin_transaction();
+try {
+    $db->multi_query(file_get_contents(dirname(__DIR__).'/database/migrations/20261016_specialties_es.sql'));
+    do { if ($r=$db->store_result()) $r->free(); } while ($db->more_results() && $db->next_result());
+    $db->commit();
+} catch (Throwable $e) { $db->rollback(); throw $e; }
 foreach ([['admin','aemail','apassword'],['doctor','docemail','docpassword'],['patient','pemail','ppassword']] as [$table,$id,$pass]) {
     foreach ($db->query("SELECT `$id`,`$pass` FROM `$table`") as $row) {
         if (!password_get_info($row[$pass]??'')['algo']) {
@@ -33,5 +44,10 @@ foreach ([['admin','aemail','apassword'],['doctor','docemail','docpassword'],['p
             $stmt->bind_param('ss',$hash,$row[$id]); $stmt->execute();
         }
     }
+}
+if ($fresh) {
+    require_once __DIR__.'/demo-data.php';
+    $demo=seed_demo_catalog($db);
+    echo $demo['doctors']." médicos y ".$demo['schedules']." horarios de demostración agregados.\n";
 }
 echo "eDoc listo.\n";
