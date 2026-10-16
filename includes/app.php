@@ -38,10 +38,10 @@ function page($title) {
     $name=$account['pname']??$account['docname']??$roleName;
     $current=basename($_SERVER['SCRIPT_NAME']);
     $current=['index.php'=>'dashboard.php','appointment.php'=>'appointments.php','patient.php'=>'patients.php'][$current]??$current;
-    echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'.h($title).' | CitaFácil</title><link rel="stylesheet" href="/css/app.css?v=4"></head><body class="'.($signed?'signed-in':'signed-out').'">';
+    echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'.h($title).' | CitaFácil</title><link rel="stylesheet" href="/css/app.css?v=8"><link rel="stylesheet" href="/css/calendar.css?v=2"><script src="/js/app.js?v=3" defer></script></head><body class="'.($signed?'signed-in':'signed-out').'">';
     if ($signed) {
         echo '<a class="skip-link" href="#main">Saltar al contenido</a><aside class="sidebar" aria-label="Navegación principal"><a class="brand" href="/dashboard.php"><span class="brand-mark" aria-hidden="true">♡</span><span>CitaFácil<small>Clínicas</small></span></a><div class="profile"><span class="avatar">'.h(mb_substr($name,0,1)).'</span><div><strong>'.h($name).'</strong><small>'.h($roleName).'</small></div></div><nav class="menu">';
-        $links=['/dashboard.php'=>['home','Inicio'],'/doctors.php'=>['users','Médicos'],'/schedule.php'=>['calendar',$role==='p'?'Citas disponibles':'Horarios'],'/appointments.php'=>['ticket',$role==='p'?'Mis citas':'Agenda de citas']];
+        $links=['/dashboard.php'=>['home','Inicio'],'/doctors.php'=>['users','Médicos'],'/schedule.php'=>['calendar',$role==='p'?'Hacer cita':'Calendario'],'/appointments.php'=>['ticket',$role==='p'?'Mis citas':'Citas']];
         if (in_array($role,['a','d'],true)) $links['/patients.php']=['users',$role==='d'?'Mis pacientes':'Pacientes'];
         $links['/settings.php']=['settings','Configuración'];
         foreach ($links as $url=>[$symbol,$label]) {
@@ -60,3 +60,15 @@ function page($title) {
     echo '</header>';
 }
 function endpage() { echo '</main></body></html>'; }
+function spanish_month($month,$short=false) {
+    $months=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    $name=$months[$month-1]??''; return $short?mb_substr($name,0,3):$name;
+}
+function spanish_date($date) {
+    $dt=new DateTimeImmutable($date);
+    return $dt->format('j').' de '.spanish_month((int)$dt->format('n'));
+}
+function demo_badge($email) {
+    return str_ends_with($email??'','@demo.example.invalid')?'<span class="demo-label">Demostración</span>':'';
+}
+require_once __DIR__.'/appointments.php';

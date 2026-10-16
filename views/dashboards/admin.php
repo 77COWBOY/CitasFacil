@@ -15,5 +15,5 @@ stat_card('amber','ticket','Reservas próximas',$active,'En todos los consultori
 stat_card('purple','clock','Horarios próximos',$scheduleCount,'Sesiones publicadas','/schedule.php','Ver horarios');
 ?>
 </div>
-<div class="quick-links"><a href="/doctors.php"><?= icon('medical') ?><span><strong>Equipo médico</strong><small>Especialidades y cuentas</small></span>›</a><a href="/patients.php"><?= icon('users') ?><span><strong>Pacientes</strong><small>Directorio de la clínica</small></span>›</a><a href="/schedule.php"><?= icon('calendar') ?><span><strong>Disponibilidad</strong><small>Publicación y cupos</small></span>›</a></div>
+<div class="quick-links"><a href="/doctors.php"><?= icon('medical') ?><span><strong>Equipo médico</strong><small>Especialidades y cuentas</small></span>›</a><a href="/patients.php"><?= icon('users') ?><span><strong>Pacientes</strong><small>Directorio de la clínica</small></span>›</a><a href="/schedule.php"><?= icon('calendar') ?><span><strong>Disponibilidad</strong><small>Horarios y duración</small></span>›</a></div>
 <?php agenda_preview($appointments,$role); ?>

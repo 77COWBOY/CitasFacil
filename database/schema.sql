@@ -55,17 +55,14 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `apponum` int(3) DEFAULT NULL,
   `scheduleid` int(10) DEFAULT NULL,
   `appodate` date DEFAULT NULL,
+  `starts_at` datetime DEFAULT NULL,
+  `ends_at` datetime DEFAULT NULL,
   PRIMARY KEY (`appoid`),
   KEY `pid` (`pid`),
   KEY `scheduleid` (`scheduleid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`appoid`, `pid`, `apponum`, `scheduleid`, `appodate`) VALUES
-(1, 1, 1, 1, '2022-06-03');
+-- Las nuevas instalaciones empiezan sin reservas ficticias.
 
 -- --------------------------------------------------------
 
@@ -133,24 +130,14 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `title` varchar(255) DEFAULT NULL,
   `scheduledate` date DEFAULT NULL,
   `scheduletime` time DEFAULT NULL,
+  `endtime` time DEFAULT NULL,
+  `duration_minutes` smallint NOT NULL DEFAULT 30,
   `nop` int(4) DEFAULT NULL,
   PRIMARY KEY (`scheduleid`),
   KEY `docid` (`docid`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`scheduleid`, `docid`, `title`, `scheduledate`, `scheduletime`, `nop`) VALUES
-(1, '1', 'Test Session', '2050-01-01', '18:00:00', 50),
-(2, '1', '1', '2022-06-10', '20:36:00', 1),
-(3, '1', '12', '2022-06-10', '20:33:00', 1),
-(4, '1', '1', '2022-06-10', '12:32:00', 1),
-(5, '1', '1', '2022-06-10', '20:35:00', 1),
-(6, '1', '12', '2022-06-10', '20:35:00', 1),
-(7, '1', '1', '2022-06-24', '20:36:00', 1),
-(8, '1', '12', '2022-06-10', '13:33:00', 1);
+-- tools/demo-data.php genera jornadas próximas con hora de inicio y salida.
 
 -- --------------------------------------------------------
 
@@ -170,62 +157,62 @@ CREATE TABLE IF NOT EXISTS `specialties` (
 --
 
 INSERT INTO `specialties` (`id`, `sname`) VALUES
-(1, 'Accident and emergency medicine'),
-(2, 'Allergology'),
-(3, 'Anaesthetics'),
-(4, 'Biological hematology'),
-(5, 'Cardiology'),
-(6, 'Child psychiatry'),
-(7, 'Clinical biology'),
-(8, 'Clinical chemistry'),
-(9, 'Clinical neurophysiology'),
-(10, 'Clinical radiology'),
-(11, 'Dental, oral and maxillo-facial surgery'),
-(12, 'Dermato-venerology'),
-(13, 'Dermatology'),
-(14, 'Endocrinology'),
-(15, 'Gastro-enterologic surgery'),
-(16, 'Gastroenterology'),
-(17, 'General hematology'),
-(18, 'General Practice'),
-(19, 'General surgery'),
-(20, 'Geriatrics'),
-(21, 'Immunology'),
-(22, 'Infectious diseases'),
-(23, 'Internal medicine'),
-(24, 'Laboratory medicine'),
-(25, 'Maxillo-facial surgery'),
-(26, 'Microbiology'),
-(27, 'Nephrology'),
-(28, 'Neuro-psychiatry'),
-(29, 'Neurology'),
-(30, 'Neurosurgery'),
-(31, 'Nuclear medicine'),
-(32, 'Obstetrics and gynecology'),
-(33, 'Occupational medicine'),
-(34, 'Ophthalmology'),
-(35, 'Orthopaedics'),
-(36, 'Otorhinolaryngology'),
-(37, 'Paediatric surgery'),
-(38, 'Paediatrics'),
-(39, 'Pathology'),
-(40, 'Pharmacology'),
-(41, 'Physical medicine and rehabilitation'),
-(42, 'Plastic surgery'),
-(43, 'Podiatric Medicine'),
-(44, 'Podiatric Surgery'),
-(45, 'Psychiatry'),
-(46, 'Public health and Preventive Medicine'),
-(47, 'Radiology'),
-(48, 'Radiotherapy'),
-(49, 'Respiratory medicine'),
-(50, 'Rheumatology'),
-(51, 'Stomatology'),
-(52, 'Thoracic surgery'),
-(53, 'Tropical medicine'),
-(54, 'Urology'),
-(55, 'Vascular surgery'),
-(56, 'Venereology');
+(1, 'Medicina de urgencias'),
+(2, 'Alergología'),
+(3, 'Anestesiología'),
+(4, 'Hematología biológica'),
+(5, 'Cardiología'),
+(6, 'Psiquiatría infantil'),
+(7, 'Biología clínica'),
+(8, 'Bioquímica clínica'),
+(9, 'Neurofisiología clínica'),
+(10, 'Radiología clínica'),
+(11, 'Cirugía bucal y maxilofacial'),
+(12, 'Dermatología y venereología'),
+(13, 'Dermatología'),
+(14, 'Endocrinología'),
+(15, 'Cirugía gastroenterológica'),
+(16, 'Gastroenterología'),
+(17, 'Hematología general'),
+(18, 'Medicina general'),
+(19, 'Cirugía general'),
+(20, 'Geriatría'),
+(21, 'Inmunología'),
+(22, 'Infectología'),
+(23, 'Medicina interna'),
+(24, 'Medicina de laboratorio'),
+(25, 'Cirugía maxilofacial'),
+(26, 'Microbiología'),
+(27, 'Nefrología'),
+(28, 'Neuropsiquiatría'),
+(29, 'Neurología'),
+(30, 'Neurocirugía'),
+(31, 'Medicina nuclear'),
+(32, 'Ginecología y obstetricia'),
+(33, 'Medicina del trabajo'),
+(34, 'Oftalmología'),
+(35, 'Ortopedia'),
+(36, 'Otorrinolaringología'),
+(37, 'Cirugía pediátrica'),
+(38, 'Pediatría'),
+(39, 'Anatomía patológica'),
+(40, 'Farmacología'),
+(41, 'Medicina física y rehabilitación'),
+(42, 'Cirugía plástica'),
+(43, 'Medicina podológica'),
+(44, 'Cirugía podológica'),
+(45, 'Psiquiatría'),
+(46, 'Salud pública y medicina preventiva'),
+(47, 'Radiología'),
+(48, 'Radioterapia'),
+(49, 'Neumología'),
+(50, 'Reumatología'),
+(51, 'Estomatología'),
+(52, 'Cirugía torácica'),
+(53, 'Medicina tropical'),
+(54, 'Urología'),
+(55, 'Cirugía vascular'),
+(56, 'Venereología');
 
 -- --------------------------------------------------------
 
